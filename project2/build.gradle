@@ -1,0 +1,26 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+archivesBaseName = 'gradle-bintray-example-project2'
+
+bintray {
+    dryRun = true
+    publish = true
+    user = findProperty('bintray.user')
+    key = findProperty('bintray.key')
+    pkg {
+        name = project.archivesBaseName
+        repo = 'gradle-bintray-test'
+        userOrg = 'infostellarinc'
+        licenses = ['Public Domain']
+        vcsUrl = 'https://github.com/anuraaga/gradle-bintray-test.git'
+        githubRepo = 'anuraaga/gradle-bintray-test'
+        version {
+            name = project.version
+            gpg {
+                sign = true
+            }
+        }
+    }
+    publications = ['maven']
+}

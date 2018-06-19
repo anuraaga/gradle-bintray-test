@@ -1,0 +1,24 @@
+plugins {
+    id "com.jfrog.bintray" version "1.8.2" apply false
+}
+
+allprojects {
+    apply plugin: 'idea'
+
+    project.group = 'com.stellarstation.gradlebintraytest'
+
+    plugins.withType(org.gradle.api.publish.maven.plugins.MavenPublishPlugin) {
+        project.apply plugin: 'com.jfrog.bintray'
+
+        afterEvaluate {
+            publishing {
+                publications {
+                    maven(MavenPublication) {
+                        from components.java
+                        artifactId = project.archivesBaseName
+                    }
+                }
+            }
+        }
+    }
+}
